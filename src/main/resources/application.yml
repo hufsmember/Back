@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: "hufs"
+
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:~/hufs/testdb;MODE=Oracle
+    username: sa
+    password: sa
+    hikari:
+      jdbc-url: jdbc:h2:~/hufs/testdb
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

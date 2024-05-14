@@ -15,8 +15,6 @@ public class BaseResponseDTO<T> {
     private Boolean isSuccess;
     private int statusCode;
     private String message;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL) //data가 null이면 json 직렬화에서 제외하고, 출력되지 않도록 지정해줌.
     private T data;
 
     public static BaseResponseDTO<Void> ok() { //보이드는 data가 없음을 명시

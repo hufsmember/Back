@@ -1,6 +1,6 @@
 package com.example.hufs.common.response;
 
-import com.example.hufs.common.exception.ExceptionType;
+import com.example.hufs.common.exception.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,38 +43,20 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static BaseResponseDTO<Void> error(ExceptionType exceptionType) {
+    public static BaseResponseDTO<Void> error(ErrorCode errorCode) {
         return BaseResponseDTO.<Void>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
-                .message(exceptionType.getMessage())
+                .statusCode(errorCode.getHttpStatus().value())
+                .message(errorCode.getMessage())
                 .data(null)
                 .build();
     }
 
-    public static <T> BaseResponseDTO<T> errorWithData(ExceptionType exceptionType, T data) {
-        return BaseResponseDTO.<T>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
-                .message(null)
-                .data(data)
-                .build();
-    }
-
-    public static BaseResponseDTO<Void> errorWithMessage(ExceptionType exceptionType) {
+    public static BaseResponseDTO<Void> errorWithMessage(HttpStatus status, String message) {
         return BaseResponseDTO.<Void>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
-                .message(exceptionType.getMessage())
+                .statusCode(status.value())
+                .message(message)
                 .data(null)
                 .build();
     }
-
-
-    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ExceptionType exceptionType, T data) {
-        return BaseResponseDTO.<T>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
-                .message(exceptionType.getMessage())
-                .data(data)
-                .build();
-    }
-
 
 }

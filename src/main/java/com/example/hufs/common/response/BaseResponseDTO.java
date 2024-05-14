@@ -1,6 +1,5 @@
 package com.example.hufs.common.response;
 
-import com.example.hufs.common.exception.ExceptionType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,35 +42,35 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static BaseResponseDTO<Void> error(ExceptionType exceptionType) {
+    public static BaseResponseDTO<Void> error(ResponseStatus responseStatus) {
         return BaseResponseDTO.<Void>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
-                .message(exceptionType.getMessage())
+                .statusCode(responseStatus.getHttpStatus().value())
+                .message(responseStatus.getMessage())
                 .data(null)
                 .build();
     }
 
-    public static <T> BaseResponseDTO<T> errorWithData(ExceptionType exceptionType, T data) {
+    public static <T> BaseResponseDTO<T> errorWithData(ResponseStatus responseStatus, T data) {
         return BaseResponseDTO.<T>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
+                .statusCode(responseStatus.getHttpStatus().value())
                 .message(null)
                 .data(data)
                 .build();
     }
 
-    public static BaseResponseDTO<Void> errorWithMessage(ExceptionType exceptionType) {
+    public static BaseResponseDTO<Void> errorWithMessage(ResponseStatus responseStatus) {
         return BaseResponseDTO.<Void>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
-                .message(exceptionType.getMessage())
+                .statusCode(responseStatus.getHttpStatus().value())
+                .message(responseStatus.getMessage())
                 .data(null)
                 .build();
     }
 
 
-    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ExceptionType exceptionType, T data) {
+    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ResponseStatus responseStatus, T data) {
         return BaseResponseDTO.<T>builder()
-                .statusCode(exceptionType.getHttpStatus().value())
-                .message(exceptionType.getMessage())
+                .statusCode(responseStatus.getHttpStatus().value())
+                .message(responseStatus.getMessage())
                 .data(data)
                 .build();
     }

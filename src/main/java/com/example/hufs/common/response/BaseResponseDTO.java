@@ -2,7 +2,6 @@ package com.example.hufs.common.response;
 
 import com.example.hufs.common.exception.ExceptionType;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,7 +27,7 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static <T> BaseResponseDTO<T> okWithData(T data){ //제너릭 메서드에서 <T>를 사용하겠다고 static 뒤에 <T>를 명시
+    public static <T> BaseResponseDTO<T> okWithData(T data) { //제너릭 메서드에서 <T>를 사용하겠다고 static 뒤에 <T>를 명시
         return BaseResponseDTO.<T>builder()
                 .statusCode(HttpStatus.OK.value())
                 .data(data)
@@ -44,7 +43,7 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static BaseResponseDTO<Void> error(ExceptionType exceptionType){
+    public static BaseResponseDTO<Void> error(ExceptionType exceptionType) {
         return BaseResponseDTO.<Void>builder()
                 .statusCode(exceptionType.getHttpStatus().value())
                 .message(exceptionType.getMessage())
@@ -52,7 +51,7 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static <T> BaseResponseDTO<T> errorWithData(ExceptionType exceptionType, T data){
+    public static <T> BaseResponseDTO<T> errorWithData(ExceptionType exceptionType, T data) {
         return BaseResponseDTO.<T>builder()
                 .statusCode(exceptionType.getHttpStatus().value())
                 .message(null)
@@ -60,7 +59,7 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static BaseResponseDTO<Void> errorWithMessage(ExceptionType exceptionType){
+    public static BaseResponseDTO<Void> errorWithMessage(ExceptionType exceptionType) {
         return BaseResponseDTO.<Void>builder()
                 .statusCode(exceptionType.getHttpStatus().value())
                 .message(exceptionType.getMessage())
@@ -69,7 +68,7 @@ public class BaseResponseDTO<T> {
     }
 
 
-    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ExceptionType exceptionType, T data){
+    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ExceptionType exceptionType, T data) {
         return BaseResponseDTO.<T>builder()
                 .statusCode(exceptionType.getHttpStatus().value())
                 .message(exceptionType.getMessage())

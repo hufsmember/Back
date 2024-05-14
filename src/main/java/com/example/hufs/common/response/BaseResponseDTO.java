@@ -1,5 +1,6 @@
 package com.example.hufs.common.response;
 
+import com.example.hufs.common.exception.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,35 +43,35 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static BaseResponseDTO<Void> error(ResponseStatus responseStatus) {
+    public static BaseResponseDTO<Void> error(ErrorCode errorCode) {
         return BaseResponseDTO.<Void>builder()
-                .statusCode(responseStatus.getHttpStatus().value())
-                .message(responseStatus.getMessage())
+                .statusCode(errorCode.getHttpStatus().value())
+                .message(errorCode.getMessage())
                 .data(null)
                 .build();
     }
 
-    public static <T> BaseResponseDTO<T> errorWithData(ResponseStatus responseStatus, T data) {
+    public static <T> BaseResponseDTO<T> errorWithData(ErrorCode errorCode, T data) {
         return BaseResponseDTO.<T>builder()
-                .statusCode(responseStatus.getHttpStatus().value())
+                .statusCode(errorCode.getHttpStatus().value())
                 .message(null)
                 .data(data)
                 .build();
     }
 
-    public static BaseResponseDTO<Void> errorWithMessage(ResponseStatus responseStatus) {
+    public static BaseResponseDTO<Void> errorWithMessage(ErrorCode errorCode) {
         return BaseResponseDTO.<Void>builder()
-                .statusCode(responseStatus.getHttpStatus().value())
-                .message(responseStatus.getMessage())
+                .statusCode(errorCode.getHttpStatus().value())
+                .message(errorCode.getMessage())
                 .data(null)
                 .build();
     }
 
 
-    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ResponseStatus responseStatus, T data) {
+    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ErrorCode errorCode, T data) {
         return BaseResponseDTO.<T>builder()
-                .statusCode(responseStatus.getHttpStatus().value())
-                .message(responseStatus.getMessage())
+                .statusCode(errorCode.getHttpStatus().value())
+                .message(errorCode.getMessage())
                 .data(data)
                 .build();
     }

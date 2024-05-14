@@ -51,30 +51,12 @@ public class BaseResponseDTO<T> {
                 .build();
     }
 
-    public static <T> BaseResponseDTO<T> errorWithData(ErrorCode errorCode, T data) {
-        return BaseResponseDTO.<T>builder()
-                .statusCode(errorCode.getHttpStatus().value())
-                .message(null)
-                .data(data)
-                .build();
-    }
-
-    public static BaseResponseDTO<Void> errorWithMessage(ErrorCode errorCode) {
+    public static BaseResponseDTO<Void> errorWithMessage(HttpStatus status, String message) {
         return BaseResponseDTO.<Void>builder()
-                .statusCode(errorCode.getHttpStatus().value())
-                .message(errorCode.getMessage())
+                .statusCode(status.value())
+                .message(message)
                 .data(null)
                 .build();
     }
-
-
-    public static <T> BaseResponseDTO<T> errorWithDataAndMessage(ErrorCode errorCode, T data) {
-        return BaseResponseDTO.<T>builder()
-                .statusCode(errorCode.getHttpStatus().value())
-                .message(errorCode.getMessage())
-                .data(data)
-                .build();
-    }
-
 
 }

@@ -1,4 +1,4 @@
-package com.example.hufs.user.domain.entity.enumtype;
+package com.example.hufs.member.domain.entity.enumtype;
 
 public enum Gender {
     MALE,

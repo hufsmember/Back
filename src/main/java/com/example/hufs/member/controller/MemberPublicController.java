@@ -4,7 +4,6 @@ import com.example.hufs.common.response.BaseResponseDTO;
 import com.example.hufs.member.domain.dto.MemberLoginRequestDto;
 import com.example.hufs.member.domain.dto.MemberRequestDto;
 import com.example.hufs.member.service.MemberService;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;

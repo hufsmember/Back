@@ -21,7 +21,7 @@ public class MemberService {
     private final JwtTokenGenerator jwtTokenGenerator;
 
     @Transactional
-    public void register(MemberRequestDto memberRequestDto){
+    public void register(MemberRequestDto memberRequestDto, Boolean isFamilyExist){
         // 1. 유효성 검사
         if((memberRepository.existsByEmail(memberRequestDto.email()))){
             throw new BaseException(ErrorCode.MEMBER_NOT_EXIST);
@@ -34,6 +34,7 @@ public class MemberService {
                 .userName(memberRequestDto.name())
                 .email(memberRequestDto.email())
                 .password(encodedPassword)
+                .isFamilyExist(isFamilyExist)
                 .build();
 
         // 4. db에 저장

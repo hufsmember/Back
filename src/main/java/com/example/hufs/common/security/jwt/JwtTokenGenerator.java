@@ -14,10 +14,10 @@ import java.util.Date;
 public class JwtTokenGenerator {
 
     private final SecretKey key;
-    @Value("${JWT_ACCESS_TOKEN_EXPIRED_TIME}")
+    @Value("${jwt.secret.expired.time}")
     private Long accessExpiredTimeMills;
 
-    public JwtTokenGenerator(@Value("${JWT_ACCESS_TOKEN_SECRET_KEY}") String secret) {
+    public JwtTokenGenerator(@Value("${jwt.secret.key}") String secret) {
         this.key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8),
                 Jwts.SIG.HS256.key().build().getAlgorithm());
     }

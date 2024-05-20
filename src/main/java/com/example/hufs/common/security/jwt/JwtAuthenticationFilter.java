@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         //header에서 토큰 값을 읽어와야 함.
         String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION); //header의 AUTHORIZATION 필드를 읽어옴.(해당 필드에는 토큰 값이 있음)
-        if(accessToken!=null){
+        if (accessToken!=null){
             Authentication authentication = getEmailPassword(accessToken); //받은 엑세스 토큰으로 사용자 인증 정보를 불러옴
 
             SecurityContextHolder.getContext()
@@ -44,9 +44,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response); //Jwt 인증이 끝났으니 다음 필터로 이동
     }
 
-    private Authentication getEmailPassword(String token){
+    private Authentication getEmailPassword(String token) {
         String email = jwtTokenGenerator.getUserEmail(token);
-        if (email!=null){
+        if (email!=null) {
             UserDetails userDetails = memberDetailsProvider.loadUserByUsername(email);
             List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
             return new UsernamePasswordAuthenticationToken(

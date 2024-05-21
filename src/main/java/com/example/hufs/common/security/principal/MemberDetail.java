@@ -1,6 +1,6 @@
 package com.example.hufs.common.security.principal;
 
-import com.example.hufs.member.domain.entity.Member;
+import com.example.hufs.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

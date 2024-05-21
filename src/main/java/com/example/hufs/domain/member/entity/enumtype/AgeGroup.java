@@ -1,4 +1,4 @@
-package com.example.hufs.member.domain.entity.enumtype;
+package com.example.hufs.domain.member.entity.enumtype;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
-package com.example.hufs.member.repository;
+package com.example.hufs.domain.member.repository;
 
-import com.example.hufs.member.domain.entity.Member;
+import com.example.hufs.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;

@@ -2,7 +2,7 @@ package com.example.hufs.common.security.principal;
 
 import com.example.hufs.common.exception.BaseException;
 import com.example.hufs.common.exception.ErrorCode;
-import com.example.hufs.member.repository.MemberRepository;
+import com.example.hufs.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

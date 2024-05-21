@@ -1,12 +1,12 @@
-package com.example.hufs.member.service;
+package com.example.hufs.domain.member.service;
 
 import com.example.hufs.common.exception.BaseException;
 import com.example.hufs.common.exception.ErrorCode;
 import com.example.hufs.common.security.jwt.JwtTokenGenerator;
-import com.example.hufs.member.domain.dto.MemberLoginRequestDto;
-import com.example.hufs.member.domain.dto.MemberRequestDto;
-import com.example.hufs.member.domain.entity.Member;
-import com.example.hufs.member.repository.MemberRepository;
+import com.example.hufs.domain.member.dto.MemberLoginRequestDto;
+import com.example.hufs.domain.member.dto.MemberRequestDto;
+import com.example.hufs.domain.member.entity.Member;
+import com.example.hufs.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

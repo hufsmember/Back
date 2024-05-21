@@ -1,9 +1,9 @@
-package com.example.hufs.member.controller;
+package com.example.hufs.domain.member.controller;
 
 import com.example.hufs.common.response.BaseResponseDTO;
-import com.example.hufs.member.domain.dto.MemberLoginRequestDto;
-import com.example.hufs.member.domain.dto.MemberRequestDto;
-import com.example.hufs.member.service.MemberService;
+import com.example.hufs.domain.member.dto.MemberLoginRequestDto;
+import com.example.hufs.domain.member.dto.MemberRequestDto;
+import com.example.hufs.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;

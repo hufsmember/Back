@@ -1,4 +1,4 @@
-package com.example.hufs.member.domain.dto;
+package com.example.hufs.domain.member.dto;
 
 public record MemberRequestDto(
         String name,

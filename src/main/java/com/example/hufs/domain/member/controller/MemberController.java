@@ -4,9 +4,7 @@ import com.example.hufs.common.exception.BaseException;
 import com.example.hufs.common.exception.ErrorCode;
 import com.example.hufs.common.response.BaseResponseDTO;
 import com.example.hufs.common.security.principal.MemberDetail;
-import com.example.hufs.domain.member.dto.MemberGenderRequestDto;
-import com.example.hufs.domain.member.dto.MemberLoginRequestDto;
-import com.example.hufs.domain.member.dto.MemberRequestDto;
+import com.example.hufs.domain.member.dto.*;
 import com.example.hufs.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -55,10 +53,33 @@ public class MemberController {
             throw new BaseException(ErrorCode.TOKEN_NOT_FOUND);
         }
 
-        System.out.println(memberDetail);
-
         memberService.gender(requestDto, memberDetail.getUsername());
+        return BaseResponseDTO.ok();
+    }
 
+    @PostMapping("/age-group")
+    public BaseResponseDTO<Void> age(
+            @RequestBody @Valid MemberAgeRequestDto requestDto,
+            @AuthenticationPrincipal MemberDetail memberDetail
+    ) {
+        if (memberDetail == null) {
+            throw new BaseException(ErrorCode.TOKEN_NOT_FOUND);
+        }
+
+        memberService.age(requestDto, memberDetail.getUsername());
+        return BaseResponseDTO.ok();
+    }
+
+    @PostMapping("/vegan/allergies/type")
+    public BaseResponseDTO<Void> veganAndAllergy(
+            @RequestBody @Valid MemberVeganAllergyRequestDto requestDto,
+            @AuthenticationPrincipal MemberDetail memberDetail
+    ) {
+        if (memberDetail == null) {
+            throw new BaseException(ErrorCode.TOKEN_NOT_FOUND);
+        }
+
+        memberService.veganAndAllergy(requestDto, memberDetail.getUsername());
         return BaseResponseDTO.ok();
     }
 }

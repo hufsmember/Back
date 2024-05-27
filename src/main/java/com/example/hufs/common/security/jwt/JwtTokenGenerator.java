@@ -38,14 +38,14 @@ public class JwtTokenGenerator {
     }
 
     public String getUserEmail(String token) {
-        Claims claims = extractClaim(token);
+        Claims claims = extractClaim(token.trim());
         return claims.get("email", String.class);
     }
 
     private Claims extractClaim(String token) {
         return Jwts.parser()
                 .verifyWith(key).build()
-                .parseSignedClaims(token)
+                .parseSignedClaims(token.trim())
                 .getPayload();
     }
 

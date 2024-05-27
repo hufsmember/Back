@@ -3,16 +3,18 @@ package com.example.hufs.domain.member.service;
 import com.example.hufs.common.exception.BaseException;
 import com.example.hufs.common.exception.ErrorCode;
 import com.example.hufs.common.security.jwt.JwtTokenGenerator;
+import com.example.hufs.domain.allergy.entity.Allergy;
 import com.example.hufs.domain.allergy.repository.AllergyRepository;
-import com.example.hufs.domain.member.dto.MemberGenderRequestDto;
-import com.example.hufs.domain.member.dto.MemberLoginRequestDto;
-import com.example.hufs.domain.member.dto.MemberRequestDto;
+import com.example.hufs.domain.member.dto.*;
 import com.example.hufs.domain.member.entity.Member;
 import com.example.hufs.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +55,24 @@ public class MemberService {
                 .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
 
         member.setGender(requestDto.gender());
+    }
+
+    public void age(MemberAgeRequestDto requestDto, String email) {
+
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
+
+        member.setAgeGroup(requestDto.ageGroup());
+    }
+
+    public void veganAndAllergy(MemberVeganAllergyRequestDto requestDto, String email) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
+
+        List<Allergy> allergies = allergyRepository.findByAllergyNameIn(requestDto.allergiesName());
+
+        member.setVegan(requestDto.IsVegan());
+        member.setAllergies(allergies.stream().collect(Collectors.toSet()));
     }
 
     //로그인 요청이 들어오면 내부로직으로 검증 후 토큰을 만들고 그 토큰을 전달해주어야 함.

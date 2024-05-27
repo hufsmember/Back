@@ -2,6 +2,7 @@ package com.example.hufs.domain.member.entity;
 
 import com.example.hufs.common.entity.SoftDeleteBaseTimeEntity;
 import com.example.hufs.domain.allergy.entity.Allergy;
+import com.example.hufs.domain.cuisine.entity.Cuisine;
 import com.example.hufs.domain.member.entity.enumtype.AgeGroup;
 import com.example.hufs.domain.member.entity.enumtype.Gender;
 import jakarta.persistence.*;
@@ -47,8 +48,13 @@ public class Member extends SoftDeleteBaseTimeEntity {
     @Column
     private Boolean isVegan;
 
-    @Column
-    private String preferredCuisine;
+    @ManyToMany
+    @JoinTable(
+            name = "member_cuisine",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "cuisine_id")
+    )
+    private Set<Cuisine> preferredCuisines;
 
     @Column
     private String nonPreferredCuisine;
@@ -58,6 +64,9 @@ public class Member extends SoftDeleteBaseTimeEntity {
 
     @Column
     private String nonPreferredIngredient;
+
+    @Column
+    private Boolean termAgreed;
 
     @ManyToMany
     @Column
@@ -70,4 +79,20 @@ public class Member extends SoftDeleteBaseTimeEntity {
 
     @Column
     private LocalDateTime deletedAt;
+
+    public void setGender(Gender gender) {
+        this.genderType = gender;
+    }
+
+    public void setAgeGroup(AgeGroup ageGroup) {
+        this.ageGroupType = ageGroup;
+    }
+
+    public void setVegan(Boolean isVegan) {
+        this.isVegan = isVegan;
+    }
+
+    public void setAllergies(Set<Allergy> allergies) {
+        this.allergies = allergies;
+    }
 }

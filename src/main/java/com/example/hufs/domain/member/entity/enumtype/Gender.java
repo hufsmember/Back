@@ -1,7 +1,6 @@
 package com.example.hufs.domain.member.entity.enumtype;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public enum Gender {

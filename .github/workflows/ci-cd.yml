@@ -34,10 +34,6 @@ jobs:
         run: chmod +x ./gradlew
         shell: bash
 
-      - name: Creat asciidoctor snippet
-        run: ./gradlew clean asciidoctor
-        shell: bash
-
       - name: Build and Test with Gradle
         run: ./gradlew build --parallel -x test
         shell: bash

@@ -21,7 +21,8 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
     String root = "com.example.hufs.domain";
     String[] paths = {
-            root+".member.controller"
+            root+".member.controller",
+            root+".fridgeContent.controller"
     };
 
     @Bean
@@ -44,10 +45,10 @@ public class SwaggerConfig {
                 .name("Authorization"); // 이름은 Authorization
 
         SecurityRequirement securityRequirement = new SecurityRequirement() // 보안 요구사항 정의
-                .addList("Bearer Token"); // Bearer Token 보안 요구사항 추가(모달창에 보임)
+                .addList("accessToken"); // Bearer Token 보안 요구사항 추가(모달창에 보임)
 
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes("Bearer Token", apiKey))
+                .components(new Components().addSecuritySchemes("accessToken", apiKey))
                 .addSecurityItem(securityRequirement);
     }
 

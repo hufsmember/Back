@@ -40,5 +40,11 @@ public class FridgeContent extends SoftDeleteBaseTimeEntity {
     private LocalDateTime expiryDate;
 
     @Column
+    private Integer refridgeTemp;
+
+    @Column
+    private Integer freezeTemp;
+
+    @Column
     private LocalDateTime deletedAt;
 }

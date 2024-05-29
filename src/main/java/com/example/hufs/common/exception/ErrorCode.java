@@ -13,6 +13,7 @@ public enum ErrorCode {
     TOKEN_NOT_FOUND(HttpStatus.UNAUTHORIZED, "토큰을 찾을 수 없습니다."),
     DUPLICATED_EMAIL(HttpStatus.CONFLICT, "중복된 이메일입니다."),
     DUPLICATED_MEMBER(HttpStatus.CONFLICT, "존재하는 사용자입니다."),
+    FRIDGE_NOT_EXIST(HttpStatus.NOT_FOUND, "냉장고를 찾을 수 없습니다."),
     // 5xx
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 에러");
 

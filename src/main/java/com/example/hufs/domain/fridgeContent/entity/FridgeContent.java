@@ -29,11 +29,11 @@ public class FridgeContent extends SoftDeleteBaseTimeEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "member_food",
+            name = "fridge_content_food",
             joinColumns = @JoinColumn(name = "fridge_content_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id")
     )
-    private Set<Food> food;
+    private Set<Food> foods;
 
     @Column
     private Integer quantity;

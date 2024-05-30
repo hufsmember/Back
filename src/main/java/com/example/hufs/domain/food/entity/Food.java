@@ -2,7 +2,6 @@ package com.example.hufs.domain.food.entity;
 
 import com.example.hufs.common.entity.SoftDeleteBaseTimeEntity;
 import com.example.hufs.domain.allergy.entity.Allergy;
-import com.example.hufs.domain.food.entity.enumtype.StorageMethod;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +26,7 @@ public class Food extends SoftDeleteBaseTimeEntity {
     private String foodName;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private StorageMethod storageMethod;
+    private String storageMethod;
 
     @Column
     private Boolean isVegan;

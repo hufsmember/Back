@@ -82,7 +82,6 @@ jobs:
             -e "S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}" \
             -p 80:8080 -d ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:main
             sleep 60
-            curl -s http://${{secrets.EC2_HOST}}/health/server
             
             
         

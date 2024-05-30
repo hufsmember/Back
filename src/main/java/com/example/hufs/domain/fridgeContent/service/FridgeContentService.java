@@ -61,6 +61,7 @@ public class FridgeContentService {
         return FridgeContentResponseDto.builder()
                 .fridgeContentId(fridgeContentId)
                 .storageMethod(storageMethod.getType())
+                .foods(foods)
                 .build();
     }
 }

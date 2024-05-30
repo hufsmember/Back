@@ -42,5 +42,8 @@ public class Food extends SoftDeleteBaseTimeEntity {
     private Set<Allergy> allergies;
 
     @Column
+    private String food_image_url;
+
+    @Column
     private LocalDateTime deletedAt;
 }

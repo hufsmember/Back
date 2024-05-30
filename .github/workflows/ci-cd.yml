@@ -75,7 +75,6 @@ jobs:
             docker rm my-container || true
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:main
             docker run --name my-container \
-            --network my-network \
             -e "DATABASE_URL=${{ secrets.DB_URL }}" \
             -e "DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }}" \
             -e "S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}" \

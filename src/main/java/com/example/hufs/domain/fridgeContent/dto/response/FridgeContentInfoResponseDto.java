@@ -4,6 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record FridgeContentInfoResponseDto(
+        Long fridgeContentId,
         Integer refridgeTemp,
         Integer freezeTemp
 ) {

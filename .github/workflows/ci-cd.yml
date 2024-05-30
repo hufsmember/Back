@@ -3,7 +3,7 @@ name: CI-CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -63,3 +63,27 @@ jobs:
             S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}
             S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}
             S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+
+      - name: connect ssh to ec2 and run docker
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{secrets.EC2_PEM}}
+          host: ${{secrets.EC2_HOST}}
+          username: ${{secrets.EC2_USER}}
+          script: |
+            docker stop my-container
+            docker rm my-container
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:main
+            docker run --name my-container \
+            --network my-network \
+            -e DATABASE_URL=${{ secrets.DB_URL }} \
+            -e DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            -e S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }} \
+            -e S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }} \
+            -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
+            -p 80:8080 -d ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:main
+            sleep 60
+            curl -s http://${{secrets.EC2_HOST}}/health/server
+            
+            
+        

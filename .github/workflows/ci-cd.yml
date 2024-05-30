@@ -83,6 +83,7 @@ jobs:
             -e "JWT_ACCESS_TOKEN_SECRET_KEY=${{ secrets.JWT_ACCESS_TOKEN_SECRET_KEY }} \
             -e "JWT_ACCESS_TOKEN_EXPIRED_TIME=${{ secrets.JWT_ACCESS_TOKEN_EXPIRED_TIME }} \
             -p 80:8080 -d ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:main
+            sleep 60
 
             
             

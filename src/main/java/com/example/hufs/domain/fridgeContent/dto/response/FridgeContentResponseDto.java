@@ -2,10 +2,12 @@ package com.example.hufs.domain.fridgeContent.dto.response;
 
 import lombok.Builder;
 
+import java.util.List;
+
 @Builder
-public record FridgeContentInfoResponseDto(
+public record FridgeContentResponseDto(
         Long fridgeContentId,
-        Integer refridgeTemp,
-        Integer freezeTemp
+        String storageMethod,
+        List<List<String>> foods
 ) {
 }

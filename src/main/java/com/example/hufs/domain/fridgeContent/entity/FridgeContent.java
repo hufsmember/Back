@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,9 +27,13 @@ public class FridgeContent extends SoftDeleteBaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "food_id")
-    private Food food;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "fridge_content_food",
+            joinColumns = @JoinColumn(name = "fridge_content_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_id")
+    )
+    private Set<Food> foods;
 
     @Column
     private Integer quantity;

@@ -26,8 +26,7 @@ public class Recipe extends SoftDeleteBaseTimeEntity {
     private String recipeName;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private CuisineType cuisineType;
+    private String cuisineType;
 
     @Column
     private String description;

@@ -63,7 +63,7 @@ public class MemberService {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
 
-        member.setAgeGroup(requestDto.ageGroup());
+        member.setAgeGroup(requestDto.ageGroup().getType());
     }
 
     public void veganAndAllergy(MemberVeganAllergyRequestDto requestDto, String email) {

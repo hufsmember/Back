@@ -39,12 +39,10 @@ public class Member extends SoftDeleteBaseTimeEntity {
     private Boolean isFamilyExist;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private Gender genderType;
+    private String genderType;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private AgeGroup ageGroup;
+    private String ageGroup;
 
     @Column
     private Boolean isVegan;
@@ -56,6 +54,9 @@ public class Member extends SoftDeleteBaseTimeEntity {
             inverseJoinColumns = @JoinColumn(name = "cuisine_id")
     )
     private Set<Cuisine> preferredCuisines;
+
+    @Column
+    private String preferredCuisine;
 
     @Column
     private String nonPreferredCuisine;
@@ -85,7 +86,7 @@ public class Member extends SoftDeleteBaseTimeEntity {
         this.genderType = gender;
     }
 
-    public void setAgeGroup(AgeGroup ageGroup) {
+    public void setAgeGroup(String ageGroup) {
         this.ageGroup = ageGroup;
     }
 

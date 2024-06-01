@@ -82,7 +82,7 @@ public class Member extends SoftDeleteBaseTimeEntity {
     @Column
     private LocalDateTime deletedAt;
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.genderType = gender;
     }
 

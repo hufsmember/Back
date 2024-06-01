@@ -16,10 +16,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReceipeIngredient extends SoftDeleteBaseTimeEntity {
+public class RecipeIngredient extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "recipe_ingredient_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

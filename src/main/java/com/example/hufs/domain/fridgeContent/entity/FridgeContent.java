@@ -21,6 +21,7 @@ public class FridgeContent extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "fridge_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,6 +38,9 @@ public class FridgeContent extends SoftDeleteBaseTimeEntity {
 
     @Column
     private Integer quantity;
+
+    @Column
+    private Integer daysRemaining;
 
     @Column
     private LocalDateTime purchaseDate;

@@ -20,6 +20,7 @@ public class ShoppingList extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "shopping_list_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

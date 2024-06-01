@@ -22,7 +22,8 @@ public class SwaggerConfig {
     String root = "com.example.hufs.domain";
     String[] paths = {
             root+".member.controller",
-            root+".fridgeContent.controller"
+            root+".fridgeContent.controller",
+            root+".food.controller"
     };
 
     @Bean

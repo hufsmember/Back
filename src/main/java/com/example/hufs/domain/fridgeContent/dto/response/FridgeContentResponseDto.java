@@ -8,6 +8,6 @@ import java.util.List;
 public record FridgeContentResponseDto(
         Long fridgeContentId,
         String storageMethod,
-        List<List<String>> foods
+        List<FoodResponseDto>foods
 ) {
 }

@@ -21,6 +21,7 @@ public enum ErrorCode {
 
     //FOOD
     FOOD_NOT_FOUND(HttpStatus.NOT_FOUND, "음식을 찾을 수 없습니다."),
+    STORAGE_IS_DIFFERENT(HttpStatus.CONFLICT, "저장 방법이 다릅니다."),
 
 
     // 5xx

@@ -3,13 +3,8 @@ package com.example.hufs.domain.member.entity;
 import com.example.hufs.common.entity.SoftDeleteBaseTimeEntity;
 import com.example.hufs.domain.allergy.entity.Allergy;
 import com.example.hufs.domain.cuisine.entity.Cuisine;
-import com.example.hufs.domain.member.entity.enumtype.AgeGroup;
-import com.example.hufs.domain.member.entity.enumtype.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -55,15 +50,19 @@ public class Member extends SoftDeleteBaseTimeEntity {
     )
     private Set<Cuisine> preferredCuisines;
 
+    @Setter
     @Column
     private String preferredCuisine;
 
+    @Setter
     @Column
     private String nonPreferredCuisine;
 
+    @Setter
     @Column
     private String preferredIngredient;
 
+    @Setter
     @Column
     private String nonPreferredIngredient;
 

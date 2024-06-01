@@ -23,10 +23,11 @@ public class Member extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     @Column
-    private String userName;
+    private String memberName;
 
     @Column
     private String email;
@@ -43,7 +44,7 @@ public class Member extends SoftDeleteBaseTimeEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private AgeGroup ageGroupType;
+    private AgeGroup ageGroup;
 
     @Column
     private Boolean isVegan;
@@ -85,7 +86,7 @@ public class Member extends SoftDeleteBaseTimeEntity {
     }
 
     public void setAgeGroup(AgeGroup ageGroup) {
-        this.ageGroupType = ageGroup;
+        this.ageGroup = ageGroup;
     }
 
     public void setVegan(Boolean isVegan) {

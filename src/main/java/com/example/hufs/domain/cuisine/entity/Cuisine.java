@@ -14,6 +14,7 @@ public class Cuisine extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cuisine_id")
     private Long id;
 
     @Column

@@ -22,6 +22,7 @@ public class MemberPreference extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_preference_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

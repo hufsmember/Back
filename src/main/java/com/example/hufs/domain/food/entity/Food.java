@@ -20,6 +20,7 @@ public class Food extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "food_id")
     private Long id;
 
     @Column
@@ -30,6 +31,9 @@ public class Food extends SoftDeleteBaseTimeEntity {
 
     @Column
     private Boolean isVegan;
+
+    @Column
+    private String cuisineType;
 
     @ManyToMany
     @JoinTable(

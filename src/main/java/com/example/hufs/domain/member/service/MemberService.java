@@ -37,7 +37,7 @@ public class MemberService {
 
         // 3 멤버로 변환
         Member member = Member.builder()
-                .userName(memberRequestDto.name())
+                .memberName(memberRequestDto.name())
                 .email(memberRequestDto.email())
                 .password(encodedPassword)
                 .isFamilyExist(isFamilyExist)
@@ -95,7 +95,7 @@ public class MemberService {
         Member member = memberRepository.findById(id)
                 .orElseThrow(()-> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
         return MemberResponseDto.builder()
-                .memberName(member.getUserName())
+                .memberName(member.getMemberName())
                 .build();
     }
 

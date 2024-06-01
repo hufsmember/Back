@@ -18,6 +18,7 @@ public class Allergy extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "allergy_id")
     private Long id;
 
     @Column

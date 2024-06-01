@@ -19,6 +19,7 @@ public class Recipe extends SoftDeleteBaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "recipe_id")
     private Long id;
 
     @Column
@@ -32,7 +33,7 @@ public class Recipe extends SoftDeleteBaseTimeEntity {
     private String description;
 
     @Column
-    private String imageUrl;
+    private String recipeImageUrl;
 
     @Column
     private Boolean isVegan;

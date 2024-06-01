@@ -39,7 +39,7 @@ public class Member extends SoftDeleteBaseTimeEntity {
     private Boolean isFamilyExist;
 
     @Column
-    private String genderType;
+    private String gender;
 
     @Column
     private String ageGroup;
@@ -83,7 +83,7 @@ public class Member extends SoftDeleteBaseTimeEntity {
     private LocalDateTime deletedAt;
 
     public void setGender(String gender) {
-        this.genderType = gender;
+        this.gender = gender;
     }
 
     public void setAgeGroup(String ageGroup) {

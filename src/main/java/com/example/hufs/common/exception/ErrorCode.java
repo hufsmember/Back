@@ -17,6 +17,11 @@ public enum ErrorCode {
     // FRIDGE
     FRIDGE_NOT_EXIST(HttpStatus.NOT_FOUND, "냉장고를 찾을 수 없습니다."),
     FRIDGE_IS_EMPTY(HttpStatus.INTERNAL_SERVER_ERROR, "냉장고의 내용물이 비었습니다."),
+    FRIDGE_NOT_FOUND_MEMBER_FOOD(HttpStatus.NOT_FOUND, "음식이 냉장고에 없습니다."),
+
+    //FOOD
+    FOOD_NOT_FOUND(HttpStatus.NOT_FOUND, "음식을 찾을 수 없습니다."),
+
 
     // 5xx
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 에러");

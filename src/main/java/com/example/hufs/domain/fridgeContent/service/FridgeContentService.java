@@ -4,6 +4,7 @@ import com.example.hufs.common.exception.BaseException;
 import com.example.hufs.common.exception.ErrorCode;
 import com.example.hufs.domain.food.entity.Food;
 import com.example.hufs.domain.food.entity.enumtype.StorageMethod;
+import com.example.hufs.domain.fridgeContent.dto.response.FoodResponseDto;
 import com.example.hufs.domain.fridgeContent.dto.response.FridgeContentInfoResponseDto;
 import com.example.hufs.domain.fridgeContent.dto.response.FridgeContentResponseDto;
 import com.example.hufs.domain.fridgeContent.entity.FridgeContent;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -50,11 +50,17 @@ public class FridgeContentService {
             throw new BaseException(ErrorCode.FRIDGE_IS_EMPTY);
         }
 
-        List<List<String>> foods = new ArrayList<>();
+        List<FoodResponseDto> foods = new ArrayList<>();
 
         for (Food food : fridgeContent.getFoods()) {
             if (food.getStorageMethod().equals(storageMethod.getType())) {
-                foods.add(Arrays.asList(food.getFoodName(), food.getFood_image_url()));
+                FoodResponseDto foodToResponse = FoodResponseDto.builder()
+                        .foodId(food.getId())
+                        .foodName(food.getFoodName())
+                        .imageUrl(food.getFood_image_url())
+                        .build();
+
+                foods.add(foodToResponse);
             }
         }
 

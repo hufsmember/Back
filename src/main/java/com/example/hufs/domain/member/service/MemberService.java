@@ -6,6 +6,7 @@ import com.example.hufs.common.security.jwt.JwtTokenGenerator;
 import com.example.hufs.domain.allergy.entity.Allergy;
 import com.example.hufs.domain.allergy.repository.AllergyRepository;
 import com.example.hufs.domain.member.dto.*;
+import com.example.hufs.domain.member.dto.response.MemberPreferredRequestDto;
 import com.example.hufs.domain.member.dto.response.MemberResponseDto;
 import com.example.hufs.domain.member.entity.Member;
 import com.example.hufs.domain.member.repository.MemberRepository;
@@ -74,6 +75,17 @@ public class MemberService {
 
         member.setVegan(requestDto.IsVegan());
         member.setAllergies(allergies.stream().collect(Collectors.toSet()));
+    }
+
+    public void preferredNonPreferred(MemberPreferredRequestDto requestDto, String email) {
+
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
+
+        member.setPreferredCuisine(requestDto.preferredCuisine());
+        member.setNonPreferredCuisine(requestDto.nonPreferredCuisine());
+        member.setPreferredIngredient(requestDto.preferredIngredient());
+        member.setNonPreferredIngredient(requestDto.nonPreferredIngredient());
     }
 
     //로그인 요청이 들어오면 내부로직으로 검증 후 토큰을 만들고 그 토큰을 전달해주어야 함.

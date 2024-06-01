@@ -5,6 +5,7 @@ import com.example.hufs.common.exception.ErrorCode;
 import com.example.hufs.common.response.BaseResponseDTO;
 import com.example.hufs.common.security.principal.MemberDetail;
 import com.example.hufs.domain.member.dto.*;
+import com.example.hufs.domain.member.dto.response.MemberPreferredRequestDto;
 import com.example.hufs.domain.member.dto.response.MemberResponseDto;
 import com.example.hufs.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -81,6 +82,15 @@ public class MemberController {
         }
 
         memberService.veganAndAllergy(requestDto, memberDetail.getUsername());
+        return BaseResponseDTO.ok();
+    }
+
+    @PostMapping("/preferred")
+    public BaseResponseDTO<Void> preferred(
+            @RequestBody MemberPreferredRequestDto requestDto,
+            @AuthenticationPrincipal MemberDetail memberDetail
+    ) {
+        memberService.preferredNonPreferred(requestDto, memberDetail.getUsername());
         return BaseResponseDTO.ok();
     }
 

@@ -6,6 +6,7 @@ import com.example.hufs.common.security.jwt.JwtTokenGenerator;
 import com.example.hufs.domain.allergy.entity.Allergy;
 import com.example.hufs.domain.allergy.repository.AllergyRepository;
 import com.example.hufs.domain.member.dto.*;
+import com.example.hufs.domain.member.dto.response.MemberResponseDto;
 import com.example.hufs.domain.member.entity.Member;
 import com.example.hufs.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -86,6 +87,16 @@ public class MemberService {
             throw new BaseException(ErrorCode.MEMBER_NOT_EXIST);
         }
         return jwtTokenGenerator.createJwtToken(memberLoginRequestDto.email());
+    }
+
+    @Transactional(readOnly = true)
+    public MemberResponseDto getMember(Long id) {
+
+        Member member = memberRepository.findById(id)
+                .orElseThrow(()-> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
+        return MemberResponseDto.builder()
+                .memberName(member.getUserName())
+                .build();
     }
 
     private Boolean passwordMatcher(final String requestPassword, final Member member) {

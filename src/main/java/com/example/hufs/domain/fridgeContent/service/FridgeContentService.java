@@ -96,8 +96,12 @@ public class FridgeContentService {
         List<FoodResponseDto> foods = new ArrayList<>();
 
         for (Long foodId : foodIds) {
-            Food food = foodRepository.findByIdAndStorageMethod(foodId, storageMethod.getType())
+            Food food = foodRepository.findById(foodId)
                     .orElseThrow(()->new BaseException(ErrorCode.FOOD_NOT_FOUND));
+
+            if(!food.getStorageMethod().equals(storageMethod.getType())) {
+                continue;
+            }
 
             FoodResponseDto foodToResponse = FoodResponseDto.builder()
                         .foodId(food.getId())

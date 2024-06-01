@@ -20,7 +20,7 @@ public interface FridgeContentRepository extends JpaRepository<FridgeContent, Lo
     Optional<FridgeContent> findByMemberId(@Param("memberId") Long memberId);
 
     @Query(nativeQuery = true, value = """
-    select f
+    select f.*
     from fridge_content f
     where f.food_id = :foodId and f.member_id = :memberId
     """)

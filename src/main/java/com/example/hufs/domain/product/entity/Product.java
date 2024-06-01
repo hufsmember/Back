@@ -29,8 +29,7 @@ public class Product extends SoftDeleteBaseTimeEntity {
     private Integer price;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private ProductCategory category;
+    private String category;
 
     @Column
     private String description;

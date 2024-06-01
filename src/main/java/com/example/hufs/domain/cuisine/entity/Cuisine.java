@@ -18,5 +18,5 @@ public class Cuisine extends SoftDeleteBaseTimeEntity {
     private Long id;
 
     @Column
-    private CuisineType cuisineType;
+    private String cuisineType;
 }

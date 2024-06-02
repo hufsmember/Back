@@ -7,7 +7,6 @@ import com.example.hufs.domain.allergy.entity.Allergy;
 import com.example.hufs.domain.allergy.repository.AllergyRepository;
 import com.example.hufs.domain.member.dto.*;
 import com.example.hufs.domain.member.dto.response.MemberPreferredRequestDto;
-import com.example.hufs.domain.member.dto.response.MemberResponseDto;
 import com.example.hufs.domain.member.entity.Member;
 import com.example.hufs.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +28,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenGenerator jwtTokenGenerator;
     private final AllergyRepository allergyRepository;
+    private final Set<String> tokenBlacklist = new HashSet<>();
 
     public MemberLoginRequestDto register(MemberRequestDto memberRequestDto, Boolean isFamilyExist) {
         // 1. 유효성 검사
@@ -101,15 +103,15 @@ public class MemberService {
         return jwtTokenGenerator.createJwtToken(memberLoginRequestDto.email());
     }
 
-    @Transactional(readOnly = true)
-    public MemberResponseDto getMember(Long id) {
 
-        Member member = memberRepository.findById(id)
-                .orElseThrow(()-> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
-        return MemberResponseDto.builder()
-                .memberName(member.getMemberName())
-                .build();
+    public void logout(String token) {
+        tokenBlacklist.add(token);
     }
+
+    public boolean isTokenBlacklisted(String token) {
+        return tokenBlacklist.contains(token);
+    }
+
 
     private Boolean passwordMatcher(final String requestPassword, final Member member) {
         return passwordEncoder.matches(requestPassword, member.getPassword());

@@ -1,6 +1,7 @@
 package com.example.hufs.common.security.jwt;
 
 import com.example.hufs.common.security.principal.MemberDetailsProvider;
+import com.example.hufs.domain.member.service.MemberService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenGenerator jwtTokenGenerator;
     private final MemberDetailsProvider memberDetailsProvider;
+    private final MemberService memberService;
 
     // 사용자 인증을 처리
     @Override
@@ -34,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         //header에서 토큰 값을 읽어와야 함.
         String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION); //header의 AUTHORIZATION 필드를 읽어옴.(해당 필드에는 토큰 값이 있음)
-        if (accessToken!=null){
+        if (accessToken!=null&&memberService.isTokenBlacklisted(accessToken.trim())){
             Authentication authentication = getEmailPassword(accessToken.trim()); //받은 엑세스 토큰으로 사용자 인증 정보를 불러옴
 
             SecurityContextHolder.getContext()

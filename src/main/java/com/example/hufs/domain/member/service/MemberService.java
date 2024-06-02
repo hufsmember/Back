@@ -3,6 +3,7 @@ package com.example.hufs.domain.member.service;
 import com.example.hufs.common.exception.BaseException;
 import com.example.hufs.common.exception.ErrorCode;
 import com.example.hufs.common.security.jwt.JwtTokenGenerator;
+import com.example.hufs.common.security.jwt.TokenManager;
 import com.example.hufs.domain.allergy.entity.Allergy;
 import com.example.hufs.domain.allergy.repository.AllergyRepository;
 import com.example.hufs.domain.member.dto.*;
@@ -14,9 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +27,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenGenerator jwtTokenGenerator;
     private final AllergyRepository allergyRepository;
-    private final Set<String> tokenBlacklist = new HashSet<>();
+    private final TokenManager tokenManager; // TokenManager 주입
 
     public MemberLoginRequestDto register(MemberRequestDto memberRequestDto, Boolean isFamilyExist) {
         // 1. 유효성 검사
@@ -105,11 +104,7 @@ public class MemberService {
 
 
     public void logout(String token) {
-        tokenBlacklist.add(token);
-    }
-
-    public boolean isTokenBlacklisted(String token) {
-        return tokenBlacklist.contains(token);
+        tokenManager.addToBlacklist(token);
     }
 
 

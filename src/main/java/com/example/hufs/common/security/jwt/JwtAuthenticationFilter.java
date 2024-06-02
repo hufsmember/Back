@@ -1,13 +1,11 @@
 package com.example.hufs.common.security.jwt;
 
 import com.example.hufs.common.security.principal.MemberDetailsProvider;
-import com.example.hufs.domain.member.service.MemberService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenGenerator jwtTokenGenerator;
     private final MemberDetailsProvider memberDetailsProvider;
-    private final @Lazy MemberService memberService;
+    private final TokenManager tokenManager;
 
     // 사용자 인증을 처리
     @Override
@@ -37,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         //header에서 토큰 값을 읽어와야 함.
         String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION); //header의 AUTHORIZATION 필드를 읽어옴.(해당 필드에는 토큰 값이 있음)
-        if (accessToken!=null&&memberService.isTokenBlacklisted(accessToken.trim())){
+        if (accessToken!=null&&tokenManager.isTokenBlacklisted(accessToken.trim())){
             Authentication authentication = getEmailPassword(accessToken.trim()); //받은 엑세스 토큰으로 사용자 인증 정보를 불러옴
 
             SecurityContextHolder.getContext()

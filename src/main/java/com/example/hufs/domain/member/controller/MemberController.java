@@ -6,7 +6,6 @@ import com.example.hufs.common.response.BaseResponseDTO;
 import com.example.hufs.common.security.principal.MemberDetail;
 import com.example.hufs.domain.member.dto.*;
 import com.example.hufs.domain.member.dto.response.MemberPreferredRequestDto;
-import com.example.hufs.domain.member.dto.response.MemberResponseDto;
 import com.example.hufs.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -94,10 +93,11 @@ public class MemberController {
         return BaseResponseDTO.ok();
     }
 
-    @GetMapping("/get/{member_id}")
-    public BaseResponseDTO<MemberResponseDto> getMember(
-            @PathVariable("member_id") Long id
+    @PostMapping("/logout")
+    public BaseResponseDTO<Void> logout(
+            @RequestBody LogoutRequestDto logoutRequestDto
     ) {
-        return BaseResponseDTO.okWithData(memberService.getMember(id));
+        memberService.logout(logoutRequestDto.token());
+        return BaseResponseDTO.ok();
     }
 }

@@ -23,6 +23,9 @@ public enum ErrorCode {
     FOOD_NOT_FOUND(HttpStatus.NOT_FOUND, "음식을 찾을 수 없습니다."),
     STORAGE_IS_DIFFERENT(HttpStatus.CONFLICT, "저장 방법이 다릅니다."),
 
+    //RECIPE
+    RECIPE_NOT_FOUND(HttpStatus.NOT_FOUND, "레시피를 찾을 수 없습니다."),
+
 
     // 5xx
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 에러");

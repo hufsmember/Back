@@ -28,10 +28,10 @@ public class FridgeContentController {
         return BaseResponseDTO.okWithData(fridgeContentService.getFridgeContentInfo(email));
     }
 
-    @GetMapping("/{fridge_content_id}/ingredients/{storage_method}/list")
+    @GetMapping("/{fridge_content_id}/ingredients/{storageMethod}/list")
     public BaseResponseDTO<FridgeContentResponseDto> getContent(
             @PathVariable("fridge_content_id") Long fridgeContentId,
-            @PathVariable("storage_method") String storageMethod,
+            @PathVariable("storageMethod") String storageMethod,
             @AuthenticationPrincipal MemberDetail memberDetail
     ) {
         return BaseResponseDTO.okWithData(fridgeContentService.getContent(fridgeContentId,

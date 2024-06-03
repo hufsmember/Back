@@ -93,7 +93,6 @@ public class MemberController {
             @RequestBody MemberPreferredRequestDto requestDto,
             @AuthenticationPrincipal MemberDetail memberDetail
     ) {
-
         memberService.preferredNonPreferred(requestDto, memberDetail.getUsername());
         return BaseResponseDTO.ok();
     }

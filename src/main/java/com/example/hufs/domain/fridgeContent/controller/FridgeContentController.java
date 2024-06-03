@@ -2,6 +2,7 @@ package com.example.hufs.domain.fridgeContent.controller;
 
 import com.example.hufs.common.response.BaseResponseDTO;
 import com.example.hufs.common.security.principal.MemberDetail;
+import com.example.hufs.domain.food.entity.enumtype.StorageMethod;
 import com.example.hufs.domain.fridgeContent.dto.response.FridgeContentInfoResponseDto;
 import com.example.hufs.domain.fridgeContent.dto.response.FridgeContentResponseDto;
 import com.example.hufs.domain.fridgeContent.service.FridgeContentService;
@@ -28,14 +29,16 @@ public class FridgeContentController {
         return BaseResponseDTO.okWithData(fridgeContentService.getFridgeContentInfo(email));
     }
 
-    @GetMapping("/{fridge_content_id}/ingredients/{storageMethod}/list")
+    @GetMapping("/{fridge_content_id}/ingredients/{storage_method}/list")
     public BaseResponseDTO<FridgeContentResponseDto> getContent(
             @PathVariable("fridge_content_id") Long fridgeContentId,
-            @PathVariable("storageMethod") String storageMethod,
+            @PathVariable("storage_method") StorageMethod storageMethod,
             @AuthenticationPrincipal MemberDetail memberDetail
     ) {
+
+
         return BaseResponseDTO.okWithData(fridgeContentService.getContent(fridgeContentId,
-                storageMethod));
+                storageMethod.getType()));
     }
 
 }

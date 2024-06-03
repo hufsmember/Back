@@ -3,7 +3,6 @@ package com.example.hufs.domain.fridgeContent.service;
 import com.example.hufs.common.exception.BaseException;
 import com.example.hufs.common.exception.ErrorCode;
 import com.example.hufs.domain.food.entity.Food;
-import com.example.hufs.domain.food.entity.enumtype.StorageMethod;
 import com.example.hufs.domain.food.repository.FoodRepository;
 import com.example.hufs.domain.fridgeContent.dto.response.FoodResponseDto;
 import com.example.hufs.domain.fridgeContent.dto.response.FridgeContentInfoResponseDto;
@@ -89,7 +88,7 @@ public class FridgeContentService {
 //    }
 
     public FridgeContentResponseDto getContent(Long fridgeContentId,
-                                               StorageMethod storageMethod) {
+                                               String storageMethod) {
 
         List<Long> foodIds = fridgeContentRepository.findFoodIdById(fridgeContentId);
 
@@ -99,7 +98,7 @@ public class FridgeContentService {
             Food food = foodRepository.findById(foodId)
                     .orElseThrow(()->new BaseException(ErrorCode.FOOD_NOT_FOUND));
 
-            if(!food.getStorageMethod().equals(storageMethod.getType())) {
+            if(!food.getStorageMethod().equals(storageMethod)) {
                 continue;
             }
 
@@ -113,7 +112,7 @@ public class FridgeContentService {
         }
         return FridgeContentResponseDto.builder()
                 .fridgeContentId(fridgeContentId)
-                .storageMethod(storageMethod.getType())
+                .storageMethod(storageMethod)
                 .foods(foods)
                 .build();
     }

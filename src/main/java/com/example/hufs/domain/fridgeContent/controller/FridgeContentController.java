@@ -7,6 +7,7 @@ import com.example.hufs.domain.fridgeContent.dto.response.FridgeContentInfoRespo
 import com.example.hufs.domain.fridgeContent.dto.response.FridgeContentResponseDto;
 import com.example.hufs.domain.fridgeContent.service.FridgeContentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +23,8 @@ public class FridgeContentController {
 
     @GetMapping("/info")
     public BaseResponseDTO<FridgeContentInfoResponseDto> getInfo(
+            @AuthenticationPrincipal MemberDetail memberDetail
     ) {
-        MemberDetail memberDetail = (MemberDetail) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-
         String email = memberDetail.getUsername();
 
         return BaseResponseDTO.okWithData(fridgeContentService.getFridgeContentInfo(email));
@@ -34,7 +33,8 @@ public class FridgeContentController {
     @GetMapping("/{fridge_content_id}/ingredients/{storage_method}/list")
     public BaseResponseDTO<FridgeContentResponseDto> getContent(
             @PathVariable("fridge_content_id") Long fridgeContentId,
-            @PathVariable("storage_method") StorageMethod storageMethod
+            @PathVariable("storage_method") StorageMethod storageMethod,
+            @AuthenticationPrincipal MemberDetail memberDetail
     ) {
         return BaseResponseDTO.okWithData(fridgeContentService.getContent(fridgeContentId,
                 storageMethod));

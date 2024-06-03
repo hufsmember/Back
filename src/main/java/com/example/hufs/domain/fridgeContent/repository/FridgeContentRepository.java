@@ -12,10 +12,11 @@ import java.util.Optional;
 public interface FridgeContentRepository extends JpaRepository<FridgeContent, Long> {
     Optional<FridgeContent> findByMember(Member member);
 
-    @Query("""
-    select distinct f
-    from FridgeContent f
-    where f.member.id=:memberId
+    @Query(nativeQuery = true, value = """
+        SELECT DISTINCT f.*
+        FROM fridge_content f
+        WHERE f.member_id = :memberId
+        LIMIT 1
 """)
     Optional<FridgeContent> findByMemberId(@Param("memberId") Long memberId);
 

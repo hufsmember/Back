@@ -6,7 +6,6 @@ import com.example.hufs.domain.food.dto.response.FoodDetailResponseDto;
 import com.example.hufs.domain.food.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ public class FoodController {
 
     private final FoodService foodService;
 
-    @GetMapping("/get/{food_id}/")
+    @GetMapping("/get/{food_id}")
     public BaseResponseDTO<FoodDetailResponseDto> getFoodDetail(
             @PathVariable("food_id") Long foodId,
             @AuthenticationPrincipal MemberDetail memberDetail

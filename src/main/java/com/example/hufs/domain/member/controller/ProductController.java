@@ -1,4 +1,4 @@
-package com.example.hufs.domain.product.controller;
+package com.example.hufs.domain.member.controller;
 
 import com.example.hufs.common.response.BaseResponseDTO;
 import com.example.hufs.domain.product.dto.ProductListResponseDto;

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
 @OpenAPIDefinition(
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
         )
 
 )
+@Profile({"local", "develop"})
 public class SwaggerConfig {
     String root = "com.example.hufs.domain";
     String[] paths = {

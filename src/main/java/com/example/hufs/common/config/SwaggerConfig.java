@@ -44,7 +44,7 @@ public class SwaggerConfig {
         SecurityScheme apiKey = new SecurityScheme() // API Key 정의
                 .type(SecurityScheme.Type.APIKEY) //API Key정의
                 .in(SecurityScheme.In.HEADER) // 헤더에 위치
-                .name("Authorization"); // 이름은 Authorization
+                .name("accessToken"); // 이름은 Authorization
 
         SecurityRequirement securityRequirement = new SecurityRequirement() // 보안 요구사항 정의
                 .addList("accessToken"); // Bearer Token 보안 요구사항 추가(모달창에 보임)

@@ -23,7 +23,8 @@ public class SwaggerConfig {
     String[] paths = {
             root+".member.controller",
             root+".fridgeContent.controller",
-            root+".food.controller"
+            root+".food.controller",
+            root+".product.controller"
     };
 
     @Bean

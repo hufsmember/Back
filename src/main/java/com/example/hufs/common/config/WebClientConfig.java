@@ -30,6 +30,7 @@ public class WebClientConfig {
                 .forEach(writer -> ((LoggingCodecSupport) writer).setEnableLoggingRequestDetails(true));
 
         return WebClient.builder()
+                .baseUrl("baseurl")
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.create()
                         .tcpConfiguration(client -> client.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 120_000)
                                 .doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(300))

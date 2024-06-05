@@ -29,6 +29,10 @@ public enum ErrorCode {
     //PRODCUT
     PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "상품을 찾을 수 없습니다."),
 
+    //AI
+    API_REQUEST_FAIL(HttpStatus.BAD_REQUEST, "요청에 실패했습니다."),
+    API_REQUEST_NULL(HttpStatus.INTERNAL_SERVER_ERROR, "레시피 결과가 없습니다."),
+
 
     // 5xx
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 에러");

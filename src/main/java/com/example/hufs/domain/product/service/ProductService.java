@@ -35,7 +35,6 @@ public class ProductService {
         return  products.stream()
                 .map(product -> ProductListResponseDto.builder()
                         .productId(product.getId())
-                        .productName(product.getProductName())
                         .imageUrl(product.getImageUrl())
                         .quantity(product.getPrice())
                         .build())

@@ -19,7 +19,10 @@ public class ProductController {
 
     @GetMapping("/detail")
     public BaseResponseDTO<List<ProductListResponseDto>> getAllProduct(
+<<<<<<< HEAD:src/main/java/com/example/hufs/domain/member/controller/ProductController.java
+=======
             @AuthenticationPrincipal MemberDetail memberDetail
+>>>>>>> feature/36:src/main/java/com/example/hufs/domain/product/controller/ProductController.java
     ) {
         return BaseResponseDTO.okWithData(productService.getAllProduct());
     }

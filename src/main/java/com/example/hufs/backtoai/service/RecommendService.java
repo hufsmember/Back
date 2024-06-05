@@ -1,6 +1,7 @@
 package com.example.hufs.backtoai.service;
 
 import com.example.hufs.backtoai.dto.response.IngredientsResponseDto;
+import com.example.hufs.backtoai.dto.response.RecommendRecipeAIDto;
 import com.example.hufs.backtoai.dto.response.RecommendRecipeDetailResponseDto;
 import com.example.hufs.backtoai.dto.response.RecommendRecipeResponseDto;
 import com.example.hufs.common.exception.BaseException;
@@ -13,8 +14,9 @@ import com.example.hufs.domain.recipeIngrendient.entity.RecipeIngredient;
 import com.example.hufs.domain.recipeIngrendient.repository.RecipeIngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,17 +27,52 @@ public class RecommendService {
     private final RecipeRepository recipeRepository;
     private final MemberRepository memberRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
+    private final WebClient webClient;
 
-    public RecommendRecipeResponseDto getRecommendRecipe(String email) {
+    public List<RecommendRecipeResponseDto> getRecommendRecipe(String email) {
 
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(()-> new BaseException(ErrorCode.MEMBER_NOT_EXIST));
 
-        //AI로 api 요청하기
-        //요청으로 받은 데이터(Json)를 내가 보기 좋게 변환하여 담는다.
-        //리스트dto로 넣을 거 넣고, 전체 결과는 Recipe테이블에 save
+        String endPoint = "/api/recommend/recipe";
 
-        return null;
+        //요청받는 데이터 클래스를 따로 만들어줘야함
+        Mono<List<RecommendRecipeAIDto>> responseMono = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(endPoint)
+                        .queryParam("member_id",member.getId())
+                        .build())
+                .retrieve()
+                .onStatus(status -> status.is4xxClientError() || status.is5xxServerError(),
+                        clientResponse -> Mono.error(new BaseException(ErrorCode.API_REQUEST_FAIL)))
+                .bodyToFlux(RecommendRecipeAIDto.class)
+                .collectList();
+
+       List<RecommendRecipeAIDto> recipeAIDtos = responseMono.block();
+
+       if(recipeAIDtos.isEmpty()) {
+           throw new BaseException(ErrorCode.API_REQUEST_NULL);
+       }
+
+       List<Recipe> recipes = recipeAIDtos.stream()
+               .map(recipeAIDto -> Recipe.builder()
+                       .recipeName(recipeAIDto.recipeName())
+                       .cuisineType(recipeAIDto.cuisineType())
+                       .recipeImageUrl(recipeAIDto.imageUrl())
+                       .isVegan(recipeAIDto.isVegan())
+                       .description(recipeAIDto.description())
+                       .build())
+               .toList();
+
+       List<Recipe> savedRecipes = recipeRepository.saveAll(recipes);
+
+        return savedRecipes.stream().map(
+                savedRecipe -> RecommendRecipeResponseDto.builder()
+                        .recipeId(savedRecipe.getId())
+                        .cuisineName(savedRecipe.getRecipeName())
+                        .imageUrl(savedRecipe.getRecipeImageUrl())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public RecommendRecipeDetailResponseDto getRecommendRecipeDetail(Long recipeId) {

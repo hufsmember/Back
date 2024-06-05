@@ -22,4 +22,11 @@ public class ProductController {
     ) {
         return BaseResponseDTO.okWithData(productService.getAllProduct());
     }
+
+    @GetMapping("/my-product")
+    public BaseResponseDTO<ProductListResponseDto> getMyProduct(
+            @AuthenticationPrincipal MemberDetail memberDetail
+    ) {
+        return BaseResponseDTO.okWithData(productService.getMyProduct(memberDetail.getUsername()));
+    }
 }

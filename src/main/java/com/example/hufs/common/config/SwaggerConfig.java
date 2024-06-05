@@ -24,11 +24,11 @@ public class SwaggerConfig {
     String root = "com.example.hufs.domain";
     String root1 = "com.example.hufs.backtoai";
     String[] paths = {
+            root+".product.controller",
+            root1+".controller",
             root+".member.controller",
             root+".fridgeContent.controller",
-            root+".food.controller",
-            root+".product.controller",
-            root1+".controller"
+            root+".food.controller"
     };
 
     @Bean

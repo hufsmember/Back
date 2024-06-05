@@ -1,7 +1,6 @@
 package com.example.hufs.domain.recipe.entity;
 
 import com.example.hufs.common.entity.SoftDeleteBaseTimeEntity;
-import com.example.hufs.domain.recipe.entity.enumtype.CuisineType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

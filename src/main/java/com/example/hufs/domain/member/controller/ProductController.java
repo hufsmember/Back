@@ -19,6 +19,7 @@ public class ProductController {
 
     @GetMapping("/detail")
     public BaseResponseDTO<List<ProductListResponseDto>> getAllProduct(
+            @AuthenticationPrincipal MemberDetail memberDetail
     ) {
         return BaseResponseDTO.okWithData(productService.getAllProduct());
     }

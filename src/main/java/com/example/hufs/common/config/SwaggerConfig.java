@@ -28,7 +28,8 @@ public class SwaggerConfig {
             root1+".controller",
             root+".member.controller",
             root+".fridgeContent.controller",
-            root+".food.controller"
+            root+".food.controller",
+            root+".basket.controller"
     };
 
     @Bean

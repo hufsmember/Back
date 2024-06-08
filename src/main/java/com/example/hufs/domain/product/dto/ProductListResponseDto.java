@@ -5,7 +5,7 @@ import lombok.Builder;
 @Builder
 public record ProductListResponseDto(
         Long productId,
-        Integer quantity,
+        Integer price,
         String imageUrl
 ) {
 }

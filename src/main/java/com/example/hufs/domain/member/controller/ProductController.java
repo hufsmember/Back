@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping("/my-product")
-    public BaseResponseDTO<ProductListResponseDto> getMyProduct(
+    public BaseResponseDTO<List<ProductListResponseDto>> getMyProduct(
             @AuthenticationPrincipal MemberDetail memberDetail
     ) {
         return BaseResponseDTO.okWithData(productService.getMyProduct(memberDetail.getUsername()));

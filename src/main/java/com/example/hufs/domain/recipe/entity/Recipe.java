@@ -1,6 +1,7 @@
 package com.example.hufs.domain.recipe.entity;
 
 import com.example.hufs.common.entity.SoftDeleteBaseTimeEntity;
+import com.example.hufs.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,10 @@ public class Recipe extends SoftDeleteBaseTimeEntity {
 
     @Column
     private Boolean isVegan;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column
     private LocalDateTime deletedAt;

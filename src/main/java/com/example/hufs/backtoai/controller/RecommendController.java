@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/recipes/recommends")
 @RequiredArgsConstructor
@@ -20,11 +22,10 @@ public class RecommendController {
     private final RecommendService recommendService;
 
     @GetMapping()
-    public BaseResponseDTO<RecommendRecipeResponseDto> getRecommendRecipe(
+    public BaseResponseDTO<List<RecommendRecipeResponseDto>> getRecommendRecipe(
             @AuthenticationPrincipal MemberDetail memberDetail
     ) {
-        recommendService.getRecommendRecipe(memberDetail.getUsername());
-        return null;
+        return BaseResponseDTO.okWithData(recommendService.getRecommendRecipe(memberDetail.getUsername()));
     }
 
     @GetMapping("/detail/{recipe_id}")
